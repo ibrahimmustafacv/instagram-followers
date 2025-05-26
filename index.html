@@ -7,8 +7,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
   body {
-    margin: 0; 
-    padding: 0;
+    margin: 0; padding: 0;
     font-family: 'Cairo', sans-serif;
     background: linear-gradient(135deg, #fdfbfb, #ebedee);
     direction: rtl;
@@ -16,73 +15,70 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #f5f7fa, #e4e8eb, #f5f7fa, #e4e8eb);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
   }
   .container {
-    background: #fff;
+    background: white;
     border-radius: 20px;
-    padding: 35px 45px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    width: 420px;
-    max-width: 90vw;
+    padding: 30px 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    width: 400px;
     text-align: center;
     position: relative;
     overflow: hidden;
+    transform: translateY(0);
     transition: transform 0.3s ease;
   }
   .container:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
   }
   h1 {
-    color: #E1306C;
-    font-size: 30px;
-    margin-bottom: 30px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
+    color: #e1306c;
+    font-size: 28px;
+    margin-bottom: 25px;
     animation: bounceIn 1s ease forwards;
   }
   button, select, input {
     width: 100%;
-    padding: 14px 18px;
-    margin: 14px 0;
-    border-radius: 14px;
-    font-size: 17px;
-    border: 1.5px solid #ddd;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
     outline: none;
     transition: 0.3s all;
-    box-sizing: border-box;
-    font-weight: 600;
   }
   button {
-    background-color: #E1306C;
+    background-color: #e1306c;
     color: white;
     border: none;
     cursor: pointer;
-    font-weight: 700;
-    box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
-    letter-spacing: 1px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
   }
   button:hover {
     background-color: #c2255c;
-    box-shadow: 0 6px 18px rgba(194, 37, 92, 0.6);
+    animation: pulse 1.5s infinite;
   }
-  select:hover, input:hover, select:focus, input:focus {
-    border-color: #E1306C;
-    box-shadow: 0 0 8px rgba(225, 48, 108, 0.3);
+  #start-btn {
+    animation: glow 2s infinite alternate, pulse 2s infinite;
   }
   #followers-select, #payment-method {
     cursor: pointer;
   }
   .followers-anim {
-    font-size: 52px;
+    font-size: 50px;
     margin: 20px 0 0 0;
     display: none;
   }
   .followers-anim span {
     display: inline-block;
     animation: dance 1s infinite alternate ease-in-out;
-    margin: 0 6px;
+    margin: 0 5px;
   }
   .followers-anim span:nth-child(2) {
     animation-delay: 0.2s;
@@ -100,29 +96,91 @@
     animation-delay: 1s;
   }
   .footer {
-    margin-top: 28px;
+    margin-top: 25px;
     font-size: 14px;
-    color: #999;
-    user-select: none;
+    color: gray;
   }
   .payment-info {
-    margin-top: 22px;
+    margin-top: 20px;
     font-size: 18px;
     color: #333;
     display: none;
+    animation: fadeIn 0.5s ease forwards;
   }
   .payment-info img {
-    max-width: 160px;
-    margin-top: 12px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 150px;
+    margin-top: 10px;
+    transition: transform 0.3s ease;
+  }
+  .payment-info img:hover {
+    transform: scale(1.05);
   }
   .confirmation-message {
-    margin-top: 24px;
-    font-size: 18px;
+    margin-top: 20px;
+    font-size: 17px;
     color: #2d862d;
-    font-weight: 700;
+    font-weight: bold;
     display: none;
+    animation: fadeInUp 0.5s ease forwards;
+  }
+  .counter {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e1306c;
+    margin: 15px 0;
+    opacity: 0;
+  }
+  .typing-text {
+    border-right: 2px solid #e1306c;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 18px;
+    margin: 15px auto;
+    width: fit-content;
+  }
+  .scroll-down {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #e1306c;
+    font-size: 24px;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+    display: none;
+  }
+  .instagram-icon {
+    font-size: 40px;
+    margin: 15px 0;
+    animation: shake 3s infinite;
+    display: inline-block;
+  }
+  .steps-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    opacity: 0;
+  }
+  .step {
+    text-align: center;
+    flex: 1;
+    padding: 10px;
+    position: relative;
+  }
+  .step-number {
+    width: 30px;
+    height: 30px;
+    background: #e1306c;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-weight: bold;
+  }
+  .step-text {
+    font-size: 12px;
   }
   /* Animations */
   @keyframes bounceIn {
@@ -132,8 +190,52 @@
   }
   @keyframes dance {
     0% { transform: translateY(0) rotate(0deg);}
-    50% { transform: translateY(-22px) rotate(12deg);}
+    50% { transform: translateY(-20px) rotate(10deg);}
     100% { transform: translateY(0) rotate(0deg);}
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  @keyframes glow {
+    from { box-shadow: 0 0 5px rgba(225, 48, 108, 0.5); }
+    to { box-shadow: 0 0 20px rgba(225, 48, 108, 0.8); }
+  }
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-15px);}
+    60% {transform: translateY(-7px);}
+  }
+  @keyframes shake {
+    0%, 100% {transform: rotate(0deg);}
+    10%, 30%, 50%, 70%, 90% {transform: rotate(-5deg);}
+    20%, 40%, 60%, 80% {transform: rotate(5deg);}
+  }
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #e1306c }
+  }
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes slideIn {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
   }
 </style>
 </head>
@@ -141,7 +243,14 @@
 
 <div class="container">
   <h1>زيادة متابعين انستجرام</h1>
-  <button onclick="openInsta()">تابع حسابي أولاً</button>
+  
+  <div class="instagram-icon">📱</div>
+  
+  <div class="typing-text" id="typingText"></div>
+  
+  <button id="start-btn" onclick="openInsta()">ابدأ الآن</button>
+
+  <div class="counter" id="counter">+0 متابع تمت إضافتهم اليوم</div>
 
   <form id="orderForm" style="display:none;">
     <select id="followers-select" required>
@@ -170,6 +279,21 @@
     <button type="button" onclick="submitOrder()">اطلب الآن</button>
   </form>
 
+  <div class="steps-container" id="stepsContainer">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-text">اختر الباقة المناسبة</div>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-text">ادخل اسم المستخدم</div>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-text">استلم المتابعين</div>
+    </div>
+  </div>
+
   <div class="payment-info" id="paymentInfo"></div>
 
   <div class="confirmation-message" id="confirmationMessage"></div>
@@ -178,13 +302,70 @@
     <span>💃</span><span>👯‍♂️</span><span>🎉</span><span>🕺</span><span>🎊</span><span>✨</span>
   </div>
 
+  <div class="scroll-down" id="scrollDown">↓</div>
+
   <div class="footer">© 2025 جميع الحقوق محفوظة</div>
 </div>
 
 <script>
+  // Typing Effect
+  const text = "هل تريد زيادة متابعينك؟ 👇";
+  let i = 0;
+  const typingText = document.getElementById("typingText");
+  
+  function typeWriter() {
+    if (i < text.length) {
+      typingText.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 100);
+    } else {
+      typingText.style.borderRight = "none";
+      // Show counter after typing finishes
+      animateCounter();
+      // Show steps
+      document.getElementById("stepsContainer").style.opacity = "1";
+      document.getElementById("stepsContainer").style.animation = "slideIn 1s ease forwards";
+      // Show scroll down arrow
+      document.getElementById("scrollDown").style.display = "block";
+    }
+  }
+  
+  // Start typing effect when page loads
+  window.onload = function() {
+    typeWriter();
+    // Start background animations
+    document.querySelectorAll('.step').forEach((step, index) => {
+      setTimeout(() => {
+        step.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.2}s`;
+      }, 1000);
+    });
+  };
+  
+  // Animated Counter
+  function animateCounter() {
+    const counter = document.getElementById("counter");
+    let count = 0;
+    const target = Math.floor(Math.random() * 500) + 1500;
+    const interval = setInterval(() => {
+      if (count < target) {
+        count += Math.floor(target / 50);
+        if (count > target) count = target;
+        counter.textContent = `+${count} متابع تمت إضافتهم اليوم`;
+        counter.style.opacity = "1";
+      } else {
+        clearInterval(interval);
+      }
+    }, 50);
+  }
+  
   function openInsta() {
     window.open("https://www.instagram.com/ibrahimmusttafa/", "_blank");
     document.getElementById("orderForm").style.display = "block";
+    document.getElementById("orderForm").style.animation = "fadeInUp 0.5s ease forwards";
+    // Hide start button
+    document.getElementById("start-btn").style.display = "none";
+    // Scroll to form
+    document.getElementById("orderForm").scrollIntoView({ behavior: 'smooth' });
   }
 
   function showPaymentInfo() {
@@ -192,6 +373,7 @@
     const paymentInfo = document.getElementById("paymentInfo");
     const confirmationMessage = document.getElementById("confirmationMessage");
 
+    // إخفاء رسالة التأكيد كل مرة يتم تغيير طريقة الدفع
     confirmationMessage.style.display = "none";
     confirmationMessage.innerHTML = "";
 
@@ -254,7 +436,15 @@
       confirmationMessage.style.display = "none";
       confirmationMessage.innerHTML = "";
     }
+    
+    // Scroll to confirmation message
+    confirmationMessage.scrollIntoView({ behavior: 'smooth' });
   }
+  
+  // Scroll down arrow functionality
+  document.getElementById("scrollDown").addEventListener('click', function() {
+    document.getElementById("orderForm").scrollIntoView({ behavior: 'smooth' });
+  });
 </script>
 
 </body>
