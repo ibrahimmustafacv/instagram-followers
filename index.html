@@ -1,174 +1,247 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>زيادة متابعين إنستجرام</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <style>
-    body {
-      font-family: 'Cairo', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #ffe4ec, #f9f9ff);
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>زيادة متابعين انستجرام متحركة</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
-    .hero {
-      text-align: center;
-      padding: 60px 20px;
-      position: relative;
-      background: linear-gradient(to top left, #e1306c, #fd8a9c);
-      color: white;
-      clip-path: ellipse(100% 70% at 50% 30%);
-    }
+  * {
+    box-sizing: border-box;
+  }
 
-    .hero h1 {
-      font-size: 40px;
-      margin-bottom: 10px;
-      animation: fadeDown 1s ease-out forwards;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(to right, #ffdde1, #ee9ca7);
+    direction: rtl;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
-    .hero p {
-      font-size: 18px;
-      opacity: 0.9;
-      animation: fadeDown 1.5s ease-out forwards;
-    }
+  .container {
+    background: #ffffff;
+    border-radius: 25px;
+    padding: 35px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+  }
 
-    @keyframes fadeDown {
-      0% { opacity: 0; transform: translateY(-30px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+  h1 {
+    color: #e1306c;
+    font-size: 30px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    animation: fadeInDown 1s ease;
+  }
 
-    .container {
-      max-width: 500px;
-      margin: -40px auto 30px;
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-    }
+  button, select, input {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: 0.3s;
+    font-family: 'Cairo', sans-serif;
+  }
 
-    select, input, button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 15px;
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      font-size: 16px;
-      outline: none;
-      transition: 0.3s ease;
-    }
+  input:focus, select:focus {
+    border-color: #e1306c;
+    box-shadow: 0 0 5px rgba(225, 48, 108, 0.3);
+  }
 
-    button {
-      background: #e1306c;
-      color: white;
-      font-weight: bold;
-      border: none;
-    }
+  button {
+    background-color: #e1306c;
+    color: white;
+    border: none;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+  }
 
-    button:hover {
-      background: #c12559;
-    }
+  button:hover {
+    background-color: #c2185b;
+  }
 
-    .icon-anim {
-      font-size: 40px;
-      color: #e1306c;
-      animation: bounce 1s infinite;
-      margin: 20px 0;
-    }
+  .followers-anim {
+    font-size: 40px;
+    margin-top: 20px;
+    display: none;
+  }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
+  .followers-anim span {
+    display: inline-block;
+    animation: dance 1s infinite alternate;
+    margin: 0 5px;
+  }
 
-    .follow-me {
-      margin-top: 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
+  .followers-anim span:nth-child(2) { animation-delay: 0.2s; }
+  .followers-anim span:nth-child(3) { animation-delay: 0.4s; }
+  .followers-anim span:nth-child(4) { animation-delay: 0.6s; }
+  .followers-anim span:nth-child(5) { animation-delay: 0.8s; }
+  .followers-anim span:nth-child(6) { animation-delay: 1s; }
 
-    .follow-me a {
-      color: #e1306c;
-      font-weight: bold;
-      text-decoration: none;
-      transition: 0.3s ease;
-    }
+  .payment-info {
+    margin-top: 20px;
+    font-size: 17px;
+    color: #555;
+    display: none;
+  }
 
-    .follow-me a:hover {
-      text-decoration: underline;
-    }
+  .payment-info img {
+    max-width: 130px;
+    margin-top: 10px;
+    border-radius: 8px;
+  }
 
-    .footer {
-      text-align: center;
-      font-size: 14px;
-      color: #888;
-      margin-top: 40px;
-    }
-  </style>
+  .confirmation-message {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #1b8a1b;
+    font-weight: bold;
+    display: none;
+  }
+
+  .footer {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #999;
+  }
+
+  /* Animations */
+  @keyframes dance {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-15px); }
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
 </head>
 <body>
 
-  <div class="hero">
-    <h1>✦ زوّد متابعينك دلوقتي ✦</h1>
-    <p>اختار عدد المتابعين وخد تجربة مجانية أو ادفع بسهولة</p>
-  </div>
+<div class="container">
+  <h1>زيادة متابعين انستجرام</h1>
+  <button onclick="openInsta()">تابع حسابي أولاً</button>
 
-  <div class="container">
-    <div class="icon-anim">
-      <i class="fas fa-users"></i>
-    </div>
-
-    <select id="followers-count">
-      <option disabled selected>اختر عدد المتابعين</option>
+  <form id="orderForm" style="display:none;">
+    <select id="followers-select" required>
+      <option value="" disabled selected>اختر عدد المتابعين</option>
       <option value="free">تجربة مجانية</option>
-      <option value="1000">1,000 متابع</option>
-      <option value="5000">5,000 متابع</option>
-      <option value="10000">10,000 متابع</option>
+      <option value="1000">1,000 متابع — 150 EG</option>
+      <option value="2000">2,000 متابع — 290 EG</option>
+      <option value="3000">3,000 متابع — 430 EG</option>
+      <option value="4000">4,000 متابع — 570 EG</option>
+      <option value="5000">5,000 متابع — 700 EG</option>
+      <option value="6000">6,000 متابع — 830 EG</option>
+      <option value="7000">7,000 متابع — 960 EG</option>
+      <option value="8000">8,000 متابع — 1,080 EG</option>
+      <option value="9000">9,000 متابع — 1,210 EG</option>
+      <option value="10000">10,000 متابع — 1,330 EG</option>
     </select>
 
-    <input type="text" id="username" placeholder="اسم المستخدم على إنستجرام" />
+    <input type="text" id="username" placeholder="أدخل اسم المستخدم على انستجرام" required />
 
-    <select id="payment-method">
-      <option disabled selected>اختر طريقة الدفع</option>
+    <select id="payment-method" onchange="showPaymentInfo()" required>
+      <option value="" disabled selected>اختر طريقة الدفع</option>
       <option value="vodafone">فودافون كاش</option>
-      <option value="telda">باركود تيلدا</option>
+      <option value="tilda">باركود تيلدا</option>
     </select>
 
-    <button onclick="orderNow()">أطلب المتابعين</button>
+    <button type="button" onclick="submitOrder()">اطلب الآن</button>
+  </form>
 
-    <div class="follow-me">
-      <p>📸 تابع حسابنا على إنستجرام</p>
-      <a href="https://www.instagram.com/ibrahimmusttafa/" target="_blank">@ibrahimmusttafa</a>
-    </div>
+  <div class="payment-info" id="paymentInfo"></div>
+  <div class="confirmation-message" id="confirmationMessage"></div>
+  <div class="followers-anim" id="dancingFollowers">
+    <span>💃</span><span>👯‍♂️</span><span>🎉</span><span>🕺</span><span>🎊</span><span>✨</span>
   </div>
+  <div class="footer">© 2025 جميع الحقوق محفوظة</div>
+</div>
 
-  <div class="footer">
-    جميع الحقوق محفوظة © 2025
-  </div>
+<script>
+  function openInsta() {
+    window.open("https://www.instagram.com/ibrahimmusttafa/", "_blank");
+    document.getElementById("orderForm").style.display = "block";
+  }
 
-  <script>
-    function orderNow() {
-      const followers = document.getElementById("followers-count").value;
-      const username = document.getElementById("username").value.trim();
-      const method = document.getElementById("payment-method").value;
+  function showPaymentInfo() {
+    const payment = document.getElementById("payment-method").value;
+    const paymentInfo = document.getElementById("paymentInfo");
+    const confirmationMessage = document.getElementById("confirmationMessage");
 
-      if (!followers || !username || !method) {
-        alert("من فضلك أكمل جميع البيانات");
-        return;
-      }
+    confirmationMessage.style.display = "none";
+    confirmationMessage.innerHTML = "";
 
-      if (followers === "free") {
-        alert("🎁 تم تفعيل تجربتك المجانية بنجاح!\nسوف تحصل على المتابعين قريبًا");
-      } else {
-        alert(`✅ الطلب تم بنجاح!\nسيتم التواصل معك بعد التحويل (${followers} متابع)`);
-      }
+    if (payment === "vodafone") {
+      paymentInfo.style.display = "block";
+      paymentInfo.innerHTML = `
+        <strong>رقم فودافون كاش للتحويل:</strong><br />
+        <span style="font-size:22px; color:#e1306c;">01097958358</span>
+      `;
+    } else if (payment === "tilda") {
+      paymentInfo.style.display = "block";
+      paymentInfo.innerHTML = `
+        <strong>امسح الباركود للدفع عبر تيلدا:</strong><br />
+        <img src="qr.png" alt="باركود تيلدا" />
+      `;
+    } else {
+      paymentInfo.style.display = "none";
+      paymentInfo.innerHTML = "";
     }
-  </script>
+  }
+
+  function submitOrder() {
+    const followers = document.getElementById("followers-select").value;
+    const username = document.getElementById("username").value.trim();
+    const payment = document.getElementById("payment-method").value;
+    const confirmationMessage = document.getElementById("confirmationMessage");
+
+    if (!followers) {
+      alert("من فضلك اختر عدد المتابعين");
+      return;
+    }
+    if (followers === "free") {
+      alert("تم اختيار التجربة المجانية! سيتم التواصل معك قريباً.");
+      return;
+    }
+    if (username.length === 0) {
+      alert("من فضلك أدخل اسم المستخدم");
+      return;
+    }
+    if (!payment) {
+      alert("من فضلك اختر طريقة الدفع");
+      return;
+    }
+
+    document.getElementById("dancingFollowers").style.display = "block";
+
+    if (payment === "vodafone") {
+      confirmationMessage.style.display = "block";
+      confirmationMessage.innerHTML = `
+        شكراً لك!<br />
+        من فضلك أرسل صورة تحويل فودافون كاش على رقم <strong>01097958358</strong> عبر الواتساب.
+      `;
+    } else if (payment === "tilda") {
+      confirmationMessage.style.display = "block";
+      confirmationMessage.innerHTML = `
+        شكراً لك!<br />
+        سيتم إرسال المتابعين خلال 72 ساعة بعد الدفع.
+      `;
+    }
+  }
+</script>
 
 </body>
 </html>
