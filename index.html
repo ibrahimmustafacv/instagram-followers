@@ -1,245 +1,270 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>زيادة متابعين انستجرام متحركة</title>
+<title>زيادة متابعين انستجرام</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
-
-  * {
-    box-sizing: border-box;
-  }
-
+  @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
   body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Cairo', sans-serif;
-    background: linear-gradient(to right, #ffdde1, #ee9ca7);
-    direction: rtl;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-
-  .container {
-    background: #ffffff;
-    border-radius: 25px;
-    padding: 35px;
-    width: 100%;
-    max-width: 420px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    margin: 0; padding: 0; font-family: 'Cairo', sans-serif;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: white;
     text-align: center;
-    position: relative;
   }
-
+  @keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
   h1 {
-    color: #e1306c;
-    font-size: 30px;
-    margin-bottom: 30px;
+    margin-top: 30px;
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px #ff66a3;
+  }
+  #animated-text {
+    font-size: 1.4rem;
+    margin: 15px 0 40px 0;
+    height: 30px;
     font-weight: bold;
-    animation: fadeInDown 1s ease;
   }
-
-  button, select, input {
-    width: 100%;
-    padding: 14px;
-    margin: 12px 0;
-    border-radius: 12px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    outline: none;
-    transition: 0.3s;
-    font-family: 'Cairo', sans-serif;
-  }
-
-  input:focus, select:focus {
-    border-color: #e1306c;
-    box-shadow: 0 0 5px rgba(225, 48, 108, 0.3);
-  }
-
   button {
     background-color: #e1306c;
-    color: white;
     border: none;
-    font-weight: bold;
-    transition: 0.3s;
+    color: white;
+    padding: 15px 35px;
+    font-size: 1.3rem;
+    border-radius: 30px;
     cursor: pointer;
+    box-shadow: 0 0 20px #e1306c;
+    transition: background-color 0.3s ease;
   }
-
   button:hover {
-    background-color: #c2185b;
+    background-color: #bc1873;
   }
-
-  .followers-anim {
-    font-size: 40px;
-    margin-top: 20px;
+  form {
+    margin-top: 40px;
+    background: rgba(255,255,255,0.1);
+    padding: 25px 15px;
+    border-radius: 20px;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
     display: none;
   }
-
-  .followers-anim span {
-    display: inline-block;
-    animation: dance 1s infinite alternate;
-    margin: 0 5px;
+  select, input[type=text] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1rem;
+    margin: 12px 0;
+    border-radius: 15px;
+    border: none;
   }
-
-  .followers-anim span:nth-child(2) { animation-delay: 0.2s; }
-  .followers-anim span:nth-child(3) { animation-delay: 0.4s; }
-  .followers-anim span:nth-child(4) { animation-delay: 0.6s; }
-  .followers-anim span:nth-child(5) { animation-delay: 0.8s; }
-  .followers-anim span:nth-child(6) { animation-delay: 1s; }
-
-  .payment-info {
-    margin-top: 20px;
-    font-size: 17px;
-    color: #555;
-    display: none;
-  }
-
-  .payment-info img {
-    max-width: 130px;
+  #paymentInfo {
     margin-top: 10px;
-    border-radius: 8px;
   }
-
-  .confirmation-message {
+  #paymentInfo img {
+    max-width: 150px;
+    margin-top: 5px;
+  }
+  #confirmationMessage {
     margin-top: 20px;
-    font-size: 16px;
-    color: #1b8a1b;
     font-weight: bold;
+    font-size: 1.1rem;
+    color: #00ff88;
     display: none;
   }
-
+  #animated-counter {
+    margin-top: 50px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ffcc;
+  }
+  #scroll-arrow {
+    font-size: 2rem;
+    margin-top: 40px;
+    cursor: pointer;
+    animation: bounce 1.5s infinite;
+  }
+  @keyframes bounce {
+    0%, 100% {transform: translateY(0);}
+    50% {transform: translateY(15px);}
+  }
+  #animated-svg {
+    margin: 30px auto;
+    width: 80px;
+    height: 80px;
+    animation: spin 8s linear infinite;
+  }
+  @keyframes spin {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+  }
   .footer {
-    margin-top: 30px;
-    font-size: 14px;
-    color: #999;
-  }
-
-  /* Animations */
-  @keyframes dance {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-15px); }
-  }
-
-  @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    margin-top: 80px;
+    font-size: 1rem;
+    opacity: 0.5;
   }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>زيادة متابعين انستجرام</h1>
-  <button onclick="openInsta()">تابع حسابي أولاً</button>
+<h1>زيادة متابعين انستجرام</h1>
+<div id="animated-text"></div>
 
-  <form id="orderForm" style="display:none;">
-    <select id="followers-select" required>
-      <option value="" disabled selected>اختر عدد المتابعين</option>
-      <option value="free">تجربة مجانية</option>
-      <option value="1000">1,000 متابع — 150 EG</option>
-      <option value="2000">2,000 متابع — 290 EG</option>
-      <option value="3000">3,000 متابع — 430 EG</option>
-      <option value="4000">4,000 متابع — 570 EG</option>
-      <option value="5000">5,000 متابع — 700 EG</option>
-      <option value="6000">6,000 متابع — 830 EG</option>
-      <option value="7000">7,000 متابع — 960 EG</option>
-      <option value="8000">8,000 متابع — 1,080 EG</option>
-      <option value="9000">9,000 متابع — 1,210 EG</option>
-      <option value="10000">10,000 متابع — 1,330 EG</option>
-    </select>
+<button id="followBtn" onclick="openInsta()">تابع حسابي أولاً</button>
 
-    <input type="text" id="username" placeholder="أدخل اسم المستخدم على انستجرام" required />
+<form id="orderForm">
+  <label for="followers-select">اختر عدد المتابعين:</label>
+  <select id="followers-select" name="followers">
+    <option value="">-- اختر --</option>
+    <option value="free">متابعين مجانيين (50)</option>
+    <option value="100">100 متابع</option>
+    <option value="500">500 متابع</option>
+    <option value="1000">1000 متابع</option>
+  </select>
 
-    <select id="payment-method" onchange="showPaymentInfo()" required>
-      <option value="" disabled selected>اختر طريقة الدفع</option>
-      <option value="vodafone">فودافون كاش</option>
-      <option value="tilda">باركود تيلدا</option>
-    </select>
+  <label for="username">اسم حسابك على انستجرام:</label>
+  <input type="text" id="username" name="username" placeholder="مثلاً: ibrahimmusttafa" />
 
-    <button type="button" onclick="submitOrder()">اطلب الآن</button>
-  </form>
+  <label for="payment-method">اختر طريقة الدفع:</label>
+  <select id="payment-method" name="payment">
+    <option value="">-- اختر --</option>
+    <option value="vodafone">فودافون كاش</option>
+    <option value="tilda">باركود تيلدا</option>
+  </select>
 
-  <div class="payment-info" id="paymentInfo"></div>
-  <div class="confirmation-message" id="confirmationMessage"></div>
-  <div class="followers-anim" id="dancingFollowers">
-    <span>💃</span><span>👯‍♂️</span><span>🎉</span><span>🕺</span><span>🎊</span><span>✨</span>
-  </div>
-  <div class="footer">© 2025 جميع الحقوق محفوظة</div>
-</div>
+  <div id="paymentInfo"></div>
+
+  <button type="button" onclick="submitOrder()">اطلب الآن</button>
+
+  <div id="confirmationMessage"></div>
+</form>
+
+<div id="animated-counter">عدد المتابعين: 0</div>
+
+<div id="scroll-arrow" title="مرر لأسفل">&#x21e3;</div>
+
+<svg id="animated-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="#e1306c">
+  <circle cx="32" cy="32" r="30" stroke="#e1306c" stroke-width="3" fill="none" />
+  <path d="M32 16 L32 48 M16 32 L48 32" stroke="#e1306c" stroke-width="3" stroke-linecap="round" />
+</svg>
+
+<div class="footer">© 2025 زيادة متابعين انستجرام</div>
 
 <script>
+  const messages = [
+    'هل تريد متابعين حقيقيين؟',
+    'زيادة المتابعين بسرعة وأمان',
+    'خدمة موثوقة وفعالة',
+    'جرب الخدمة المجانية الآن!',
+    'أفضل الأسعار في السوق',
+  ];
+  let msgIndex = 0;
+  let charIndex = 0;
+  const animatedText = document.getElementById('animated-text');
+
+  function typeMessage() {
+    if (charIndex < messages[msgIndex].length) {
+      animatedText.textContent += messages[msgIndex][charIndex];
+      charIndex++;
+      setTimeout(typeMessage, 120);
+    } else {
+      setTimeout(() => {
+        eraseMessage();
+      }, 2000);
+    }
+  }
+  function eraseMessage() {
+    if (charIndex > 0) {
+      animatedText.textContent = animatedText.textContent.slice(0, -1);
+      charIndex--;
+      setTimeout(eraseMessage, 60);
+    } else {
+      msgIndex = (msgIndex + 1) % messages.length;
+      setTimeout(typeMessage, 500);
+    }
+  }
+  typeMessage();
+
   function openInsta() {
-    window.open("https://www.instagram.com/ibrahimmusttafa/", "_blank");
-    document.getElementById("orderForm").style.display = "block";
+    window.open('https://www.instagram.com/ibrahimmusttafa/', '_blank');
+    document.getElementById('orderForm').style.display = 'block';
+    document.getElementById('followBtn').style.display = 'none';
   }
 
+  let currentCount = 0;
+  const counterElem = document.getElementById('animated-counter');
+
+  function animateCounter(target) {
+    let start = 0;
+    const duration = 2000;
+    const stepTime = Math.abs(Math.floor(duration / target));
+    let timer = setInterval(() => {
+      start += 1;
+      counterElem.textContent = `عدد المتابعين: ${start}`;
+      if (start >= target) {
+        clearInterval(timer);
+      }
+    }, stepTime);
+  }
+  animateCounter(1275);
+
+  document.getElementById('scroll-arrow').addEventListener('click', () => {
+    window.scrollBy({
+      top: window.innerHeight,
+      behavior: 'smooth',
+    });
+  });
+
+  const followersSelect = document.getElementById('followers-select');
+  const paymentMethodSelect = document.getElementById('payment-method');
+  const paymentInfoDiv = document.getElementById('paymentInfo');
+  const confirmationMessage = document.getElementById('confirmationMessage');
+
+  paymentMethodSelect.addEventListener('change', showPaymentInfo);
+
   function showPaymentInfo() {
-    const payment = document.getElementById("payment-method").value;
-    const paymentInfo = document.getElementById("paymentInfo");
-    const confirmationMessage = document.getElementById("confirmationMessage");
-
-    confirmationMessage.style.display = "none";
-    confirmationMessage.innerHTML = "";
-
-    if (payment === "vodafone") {
-      paymentInfo.style.display = "block";
-      paymentInfo.innerHTML = `
-        <strong>رقم فودافون كاش للتحويل:</strong><br />
-        <span style="font-size:22px; color:#e1306c;">01097958358</span>
+    const method = paymentMethodSelect.value;
+    confirmationMessage.style.display = 'none';
+    if (method === 'vodafone') {
+      paymentInfoDiv.innerHTML = `
+        <p>ادفع عبر فودافون كاش على الرقم: <strong>01027714970</strong></p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Vodafone_Cash_Logo.svg/2560px-Vodafone_Cash_Logo.svg.png" alt="Vodafone Cash" />
       `;
-    } else if (payment === "tilda") {
-      paymentInfo.style.display = "block";
-      paymentInfo.innerHTML = `
-        <strong>امسح الباركود للدفع عبر تيلدا:</strong><br />
-        <img src="qr.png" alt="باركود تيلدا" />
+      paymentInfoDiv.style.display = 'block';
+    } else if (method === 'tilda') {
+      paymentInfoDiv.innerHTML = `
+        <p>امسح باركود تيلدا للدفع</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/QR_code_example.svg" alt="Tilda Barcode" />
       `;
+      paymentInfoDiv.style.display = 'block';
     } else {
-      paymentInfo.style.display = "none";
-      paymentInfo.innerHTML = "";
+      paymentInfoDiv.style.display = 'none';
     }
   }
 
   function submitOrder() {
-    const followers = document.getElementById("followers-select").value;
-    const username = document.getElementById("username").value.trim();
-    const payment = document.getElementById("payment-method").value;
-    const confirmationMessage = document.getElementById("confirmationMessage");
+    const followers = followersSelect.value;
+    const username = document.getElementById('username').value.trim();
+    const paymentMethod = paymentMethodSelect.value;
 
-    if (!followers) {
-      alert("من فضلك اختر عدد المتابعين");
+    if (!followers || !username || !paymentMethod) {
+      alert('من فضلك أكمل جميع الحقول');
       return;
     }
-    if (followers === "free") {
-      alert("تم اختيار التجربة المجانية! سيتم التواصل معك قريباً.");
-      return;
-    }
-    if (username.length === 0) {
-      alert("من فضلك أدخل اسم المستخدم");
-      return;
-    }
-    if (!payment) {
-      alert("من فضلك اختر طريقة الدفع");
-      return;
-    }
+    confirmationMessage.style.display = 'block';
+    confirmationMessage.textContent = `تم استلام طلبك لزيادة ${followers === 'free' ? 'متابعين مجانيين' : followers + ' متابع'} على الحساب: ${username}. سيتم التواصل معك قريبًا. شكراً لك!`;
+    paymentInfoDiv.style.display = 'none';
 
-    document.getElementById("dancingFollowers").style.display = "block";
-
-    if (payment === "vodafone") {
-      confirmationMessage.style.display = "block";
-      confirmationMessage.innerHTML = `
-        شكراً لك!<br />
-        من فضلك أرسل صورة تحويل فودافون كاش على رقم <strong>01097958358</strong> عبر الواتساب.
-      `;
-    } else if (payment === "tilda") {
-      confirmationMessage.style.display = "block";
-      confirmationMessage.innerHTML = `
-        شكراً لك!<br />
-        سيتم إرسال المتابعين خلال 72 ساعة بعد الدفع.
-      `;
-    }
+    setTimeout(() => {
+      confirmationMessage.style.display = 'none';
+      document.getElementById('orderForm').reset();
+      document.getElementById('orderForm').style.display = 'none';
+      document.getElementById('followBtn').style.display = 'block';
+    }, 6000);
   }
 </script>
 
