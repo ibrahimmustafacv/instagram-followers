@@ -5,150 +5,615 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>زيادة متابعين انستجرام متحركة</title>
 <style>
-  /* ... (ابقى جميع أنماط CSS السابقة كما هي) ... */
-
-  /* أضف هذه الأنماط الجديدة */
-  .profile-pic-container {
-    width: 80px;
-    height: 80px;
-    margin: 15px auto;
-    border-radius: 50%;
-    background: #f0f0f0;
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap');
+  
+  :root {
+    --primary-color: #e1306c;
+    --secondary-color: #833ab4;
+    --bg-color: #f8f4ff;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text-color: #333;
+    --text-muted: #666;
+  }
+  
+  body {
+    margin: 0; 
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    direction: rtl;
+    overflow-x: hidden;
     display: flex;
-    align-items: center;
     justify-content: center;
-    overflow: hidden;
-    border: 3px solid #e1306c;
+    align-items: center;
+    min-height: 100vh;
     position: relative;
   }
   
-  .profile-pic {
+  /* الخلفية المتحركة */
+  .bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    display: none;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
   }
   
-  .profile-placeholder {
-    font-size: 30px;
-    color: #aaa;
-  }
-  
-  .loading-spinner {
+  .bg-shape {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.7);
-    display: none;
-    align-items: center;
-    justify-content: center;
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: float 25s infinite linear;
+    filter: blur(30px);
   }
   
-  .spinner {
+  .shape-1 {
+    width: 300px;
+    height: 300px;
+    top: 20%;
+    left: 10%;
+    background: var(--primary-color);
+    animation-delay: 0s;
+  }
+  
+  .shape-2 {
+    width: 400px;
+    height: 400px;
+    bottom: 15%;
+    right: 10%;
+    background: var(--secondary-color);
+    animation-delay: 5s;
+  }
+  
+  .shape-3 {
+    width: 250px;
+    height: 250px;
+    top: 60%;
+    left: 30%;
+    background: #405de6;
+    animation-delay: 10s;
+  }
+  
+  .shape-4 {
+    width: 350px;
+    height: 350px;
+    top: 30%;
+    right: 25%;
+    background: #fcaf45;
+    animation-delay: 15s;
+  }
+  
+  .container {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 30px 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 400px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.5);
+    backdrop-filter: blur(10px);
+    transform: translateY(0);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    z-index: 1;
+  }
+  
+  .container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(225, 48, 108, 0.15);
+  }
+  
+  h1 {
+    color: var(--primary-color);
+    font-size: 28px;
+    margin-bottom: 25px;
+    animation: bounceIn 1s ease forwards;
+    text-shadow: 0 0 5px rgba(225, 48, 108, 0.1);
+  }
+  
+  button, select, input {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 12px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    transition: all 0.4s ease;
+    font-family: 'Cairo', sans-serif;
+  }
+  
+  button {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(225, 48, 108, 0.2);
+    z-index: 1;
+  }
+  
+  button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    transition: width 0.4s ease;
+    z-index: -1;
+  }
+  
+  button:hover::before {
+    width: 100%;
+  }
+  
+  button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(225, 48, 108, 0.3);
+  }
+  
+  button:active {
+    transform: translateY(1px);
+  }
+  
+  #start-btn {
+    animation: pulseGlow 2s infinite alternate;
+  }
+  
+  input, select {
+    background: rgba(255,255,255,0.7);
+    color: var(--text-color);
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  input:focus, select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(225, 48, 108, 0.1);
+    background: white;
+  }
+  
+  input::placeholder {
+    color: var(--text-muted);
+  }
+  
+  #followers-select, #payment-method {
+    cursor: pointer;
+  }
+  
+  .followers-anim {
+    font-size: 50px;
+    margin: 20px 0 0 0;
+    display: none;
+  }
+  
+  .followers-anim span {
+    display: inline-block;
+    animation: dance 1s infinite alternate ease-in-out;
+    margin: 0 5px;
+    filter: drop-shadow(0 0 5px rgba(225, 48, 108, 0.3));
+  }
+  
+  .followers-anim span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .followers-anim span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  .followers-anim span:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+  
+  .followers-anim span:nth-child(5) {
+    animation-delay: 0.8s;
+  }
+  
+  .followers-anim span:nth-child(6) {
+    animation-delay: 1s;
+  }
+  
+  .footer {
+    margin-top: 25px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  
+  .payment-info {
+    margin-top: 20px;
+    font-size: 18px;
+    color: var(--text-color);
+    display: none;
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  .payment-info img {
+    max-width: 150px;
+    margin-top: 10px;
+    transition: all 0.4s ease;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .payment-info img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  
+  .confirmation-message {
+    margin-top: 20px;
+    font-size: 17px;
+    color: #4CAF50;
+    font-weight: bold;
+    display: none;
+    animation: fadeInUp 0.5s ease forwards;
+  }
+  
+  .counter {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 15px 0;
+    opacity: 0;
+  }
+  
+  .typing-text {
+    border-right: 2px solid var(--primary-color);
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 18px;
+    margin: 15px auto;
+    width: fit-content;
+    color: var(--text-color);
+  }
+  
+  .scroll-down {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--primary-color);
+    font-size: 24px;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+    display: none;
+  }
+  
+  .instagram-icon {
+    font-size: 40px;
+    margin: 15px 0;
+    animation: shake 3s infinite;
+    display: inline-block;
+    color: var(--primary-color);
+  }
+  
+  .steps-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    opacity: 0;
+  }
+  
+  .step {
+    text-align: center;
+    flex: 1;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .step-number {
     width: 30px;
     height: 30px;
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #e1306c;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(225, 48, 108, 0.3);
+    transition: all 0.3s ease;
   }
   
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  .step:hover .step-number {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(225, 48, 108, 0.4);
+  }
+  
+  .step-text {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  
+  /* Animations */
+  @keyframes bounceIn {
+    0% {opacity: 0; transform: scale(0.8);}
+    60% {opacity: 1; transform: scale(1.1);}
+    100% {transform: scale(1);}
+  }
+  
+  @keyframes dance {
+    0% { transform: translateY(0) rotate(0deg);}
+    50% { transform: translateY(-20px) rotate(10deg);}
+    100% { transform: translateY(0) rotate(0deg);}
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes pulseGlow {
+    0% { transform: scale(1); box-shadow: 0 0 10px rgba(225, 48, 108, 0.2); }
+    50% { transform: scale(1.03); box-shadow: 0 0 20px rgba(225, 48, 108, 0.3); }
+    100% { transform: scale(1); box-shadow: 0 0 10px rgba(225, 48, 108, 0.2); }
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-15px);}
+    60% {transform: translateY(-7px);}
+  }
+  
+  @keyframes shake {
+    0%, 100% {transform: rotate(0deg);}
+    10%, 30%, 50%, 70%, 90% {transform: rotate(-5deg);}
+    20%, 40%, 60%, 80% {transform: rotate(5deg);}
+  }
+  
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary-color) }
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); }
+    25% { transform: translateY(-50px) translateX(50px) rotate(10deg); }
+    50% { transform: translateY(0) translateX(100px) rotate(0deg); }
+    75% { transform: translateY(50px) translateX(50px) rotate(-10deg); }
+    100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
   }
 </style>
 </head>
 <body>
 
-<!-- ... (ابقى جميع عناصر HTML السابقة كما هي) ... -->
+<!-- الخلفية المتحركة -->
+<div class="bg-animation">
+  <div class="shape-1 bg-shape"></div>
+  <div class="shape-2 bg-shape"></div>
+  <div class="shape-3 bg-shape"></div>
+  <div class="shape-4 bg-shape"></div>
+</div>
+
+<div class="container">
+  <h1>زيادة متابعين انستجرام</h1>
+  
+  <div class="instagram-icon">📱</div>
+  
+  <div class="typing-text" id="typingText"></div>
+  
+  <button id="start-btn" onclick="openInsta()">ابدأ الآن</button>
+
+  <div class="counter" id="counter">+0 متابع تمت إضافتهم اليوم</div>
 
   <form id="orderForm" style="display:none;">
-    <div class="profile-pic-container">
-      <div class="profile-placeholder">👤</div>
-      <img src="" alt="صورة الملف الشخصي" class="profile-pic" id="profilePic">
-      <div class="loading-spinner" id="loadingSpinner"><div class="spinner"></div></div>
-    </div>
-    
     <select id="followers-select" required>
-      <!-- ... (ابقى خيارات المتابعين كما هي) ... -->
+      <option value="" disabled selected>اختر عدد المتابعين</option>
+      <option value="free" style="color: #4CAF50; font-weight: bold;">تجربة مجانية</option>
+      <option value="1000">1,000 متابع — 150 EG</option>
+      <option value="2000">2,000 متابع — 290 EG</option>
+      <option value="3000">3,000 متابع — 430 EG</option>
+      <option value="4000">4,000 متابع — 570 EG</option>
+      <option value="5000">5,000 متابع — 700 EG</option>
+      <option value="6000">6,000 متابع — 830 EG</option>
+      <option value="7000">7,000 متابع — 960 EG</option>
+      <option value="8000">8,000 متابع — 1,080 EG</option>
+      <option value="9000">9,000 متابع — 1,210 EG</option>
+      <option value="10000">10,000 متابع — 1,330 EG</option>
     </select>
 
     <input type="text" id="username" placeholder="أدخل اسم المستخدم على انستجرام" required />
 
-    <!-- ... (ابقى بقية النموذج كما هو) ... -->
+    <select id="payment-method" onchange="showPaymentInfo()" required>
+      <option value="" disabled selected>اختر طريقة الدفع</option>
+      <option value="vodafone">فودافون كاش</option>
+      <option value="tilda">باركود تيلدا</option>
+    </select>
+
+    <button type="button" onclick="submitOrder()">اطلب الآن</button>
   </form>
 
-<!-- ... (ابقى بقية HTML كما هو) ... -->
+  <div class="steps-container" id="stepsContainer">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-text">اختر الباقة المناسبة</div>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-text">ادخل اسم المستخدم</div>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-text">استلم المتابعين</div>
+    </div>
+  </div>
+
+  <div class="payment-info" id="paymentInfo"></div>
+
+  <div class="confirmation-message" id="confirmationMessage"></div>
+
+  <div class="followers-anim" id="dancingFollowers">
+    <span>💃</span><span>👯‍♂️</span><span>🎉</span><span>🕺</span><span>🎊</span><span>✨</span>
+  </div>
+
+  <div class="scroll-down" id="scrollDown">↓</div>
+
+  <div class="footer">© 2025 جميع الحقوق محفوظة</div>
+</div>
 
 <script>
-  // ... (ابقى جميع الدوال السابقة كما هي) ...
-
-  // أضف هذه الدوال الجديدة
-  document.getElementById('username').addEventListener('input', function() {
-    const username = this.value.trim();
-    const profilePic = document.getElementById('profilePic');
-    const placeholder = document.querySelector('.profile-placeholder');
-    const loadingSpinner = document.getElementById('loadingSpinner');
-    
-    if (username.length > 0) {
-      // إظهار مؤشر التحميل
-      loadingSpinner.style.display = 'flex';
-      profilePic.style.display = 'none';
-      placeholder.style.display = 'none';
-      
-      // جلب صورة الملف الشخصي (باستخدام خدمة طرف ثالث)
-      fetchInstagramProfilePic(username)
-        .then(imageUrl => {
-          if (imageUrl) {
-            profilePic.src = imageUrl;
-            profilePic.style.display = 'block';
-            placeholder.style.display = 'none';
-          } else {
-            profilePic.style.display = 'none';
-            placeholder.style.display = 'block';
-            placeholder.textContent = '❌';
-          }
-          loadingSpinner.style.display = 'none';
-        })
-        .catch(() => {
-          loadingSpinner.style.display = 'none';
-          profilePic.style.display = 'none';
-          placeholder.style.display = 'block';
-          placeholder.textContent = '❌';
-        });
+  // Typing Effect
+  const text = "هل تريد زيادة متابعينك؟ 👇";
+  let i = 0;
+  const typingText = document.getElementById("typingText");
+  
+  function typeWriter() {
+    if (i < text.length) {
+      typingText.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 100);
     } else {
-      profilePic.style.display = 'none';
-      placeholder.style.display = 'block';
-      placeholder.textContent = '👤';
-    }
-  });
-
-  // دالة لجلب صورة الملف الشخصي من إنستجرام
-  async function fetchInstagramProfilePic(username) {
-    // ملاحظة: هذه طريقة بديلة لأن واجهة برمجة إنستجرام الرسمية تتطلب مصادقة
-    // يمكنك استخدام خدمة طرف ثالث مثل instagram.com أو مواقع أخرى توفر هذه الخدمة
-    
-    try {
-      // هذه طريقة بسيطة لكنها قد لا تعمل دائمًا بسبب سياسات إنستجرام
-      // في تطبيق حقيقي، ستحتاج إلى استخدام خدمة API مدفوعة أو حل أكثر تعقيدًا
-      
-      // محاولة جلب الصورة مباشرة من إنستجرام (قد لا تعمل في جميع المتصفحات)
-      const response = await fetch(`https://www.instagram.com/${username}/?__a=1`);
-      
-      if (response.ok) {
-        const data = await response.json();
-        return data.graphql.user.profile_pic_url_hd;
-      } else {
-        // إذا فشل الطلب، نستخدم صورة افتراضية أو نعيد null
-        return `https://instagram.com/${username}/?__a=1`;
-      }
-    } catch (error) {
-      console.error('Error fetching profile picture:', error);
-      // بديل: استخدام خدمة طرف ثالث مثل picuki.com
-      return `https://picuki.com/profile/${username}`;
+      typingText.style.borderRight = "none";
+      // Show counter after typing finishes
+      animateCounter();
+      // Show steps
+      document.getElementById("stepsContainer").style.opacity = "1";
+      document.getElementById("stepsContainer").style.animation = "slideIn 1s ease forwards";
+      // Show scroll down arrow
+      document.getElementById("scrollDown").style.display = "block";
     }
   }
+  
+  // Start typing effect when page loads
+  window.onload = function() {
+    typeWriter();
+    // Start background animations
+    document.querySelectorAll('.step').forEach((step, index) => {
+      setTimeout(() => {
+        step.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.2}s`;
+      }, 1000);
+    });
+  };
+  
+  // Animated Counter
+  function animateCounter() {
+    const counter = document.getElementById("counter");
+    let count = 0;
+    const target = Math.floor(Math.random() * 500) + 1500;
+    const interval = setInterval(() => {
+      if (count < target) {
+        count += Math.floor(target / 50);
+        if (count > target) count = target;
+        counter.textContent = `+${count} متابع تمت إضافتهم اليوم`;
+        counter.style.opacity = "1";
+      } else {
+        clearInterval(interval);
+      }
+    }, 50);
+  }
+  
+  function openInsta() {
+    window.open("https://www.instagram.com/ibrahimmusttafa/", "_blank");
+    document.getElementById("orderForm").style.display = "block";
+    document.getElementById("orderForm").style.animation = "fadeInUp 0.5s ease forwards";
+    // Hide start button
+    document.getElementById("start-btn").style.display = "none";
+    // Scroll to form
+    document.getElementById("orderForm").scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function showPaymentInfo() {
+    const payment = document.getElementById("payment-method").value;
+    const paymentInfo = document.getElementById("paymentInfo");
+    const confirmationMessage = document.getElementById("confirmationMessage");
+
+    // إخفاء رسالة التأكيد كل مرة يتم تغيير طريقة الدفع
+    confirmationMessage.style.display = "none";
+    confirmationMessage.innerHTML = "";
+
+    if (payment === "vodafone") {
+      paymentInfo.style.display = "block";
+      paymentInfo.innerHTML = `
+        <strong>رقم فودافون كاش للتحويل:</strong><br />
+        <span style="font-size:24px; color:var(--primary-color);">01097958358</span>
+      `;
+    } else if (payment === "tilda") {
+      paymentInfo.style.display = "block";
+      paymentInfo.innerHTML = `
+        <strong>امسح الباركود للدفع عبر تيلدا:</strong><br />
+        <img src="qr.png" alt="باركود تيلدا" />
+      `;
+    } else {
+      paymentInfo.style.display = "none";
+      paymentInfo.innerHTML = "";
+    }
+  }
+
+  function submitOrder() {
+    const followers = document.getElementById("followers-select").value;
+    const username = document.getElementById("username").value.trim();
+    const payment = document.getElementById("payment-method").value;
+    const confirmationMessage = document.getElementById("confirmationMessage");
+
+    if (!followers) {
+      alert("من فضلك اختر عدد المتابعين");
+      return;
+    }
+    if (followers === "free") {
+      alert("تم اختيار التجربة المجانية! سيتم التواصل معك قريباً.");
+      return;
+    }
+    if (username.length === 0) {
+      alert("من فضلك أدخل اسم المستخدم");
+      return;
+    }
+    if (!payment) {
+      alert("من فضلك اختر طريقة الدفع");
+      return;
+    }
+
+    document.getElementById("dancingFollowers").style.display = "block";
+
+    if (payment === "vodafone") {
+      confirmationMessage.style.display = "block";
+      confirmationMessage.innerHTML = `
+        شكراً لك!<br />
+        من فضلك أرسل صورة تحويل فودافون كاش على رقم <strong>01097958358</strong> عبر الواتساب.
+      `;
+    } else if (payment === "tilda") {
+      confirmationMessage.style.display = "block";
+      confirmationMessage.innerHTML = `
+        شكراً لك!<br />
+        سيتم إرسال المتابعين خلال 72 ساعة بعد الدفع.
+      `;
+    } else {
+      confirmationMessage.style.display = "none";
+      confirmationMessage.innerHTML = "";
+    }
+    
+    // Scroll to confirmation message
+    confirmationMessage.scrollIntoView({ behavior: 'smooth' });
+  }
+  
+  // Scroll down arrow functionality
+  document.getElementById("scrollDown").addEventListener('click', function() {
+    document.getElementById("orderForm").scrollIntoView({ behavior: 'smooth' });
+  });
 </script>
 
 </body>
